@@ -75,5 +75,22 @@ facto()
 
 echo "Le resultat est $(facto $1)"
 
+EXERCICE 6:   
+#!/bin/bash
+
+MAXIMUM=1000
+MINIMUM=1
+WINNER=$((MINIMUM+RANDOM*(1+MAXIMUM-MINIMUM)/32767))
+res=0
+while [ $res -ne $WINNER ] ; do
+        read -p "Entrez une valeur" res
+        if [ $res -eq $WINNER ] ; then
+                echo "Gagné!"
+        elif [ $res -lt $WINNER ] ; then
+                echo "C'est plus!"
+        else
+                echo "C'est moins!"
+        fi
+done
 
 
