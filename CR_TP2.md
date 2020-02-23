@@ -75,7 +75,9 @@ facto()
 
 echo "Le resultat est $(facto $1)"
 
-EXERCICE 6:   
+EXERCICE 6:    Écrivez un script qui génère un nombre aléatoire entre 1 et 1000 et demande à l’utilisateur de le deviner.
+Le programme écrira ”C’est plus !”, ”C’est moins !” ou ”Gagné !” selon les cas (vous utiliserez $RANDOM).
+
 #!/bin/bash
 
 MAXIMUM=1000
@@ -93,4 +95,95 @@ while [ $res -ne $WINNER ] ; do
         fi
 done
 
+EXERCICE 7:1. Écrivez un script qui prend en paramètres trois entiers (entre -100 et +100) et affiche le min, le max
+et la moyenne. Vous pouvez réutiliser la fonction de l’exercice 3 pour vous assurer que les paramètres
+sont bien des entiers.
+2. Généralisez le programme à un nombre quelconque de paramètres (pensez à SHIFT)
+3. Modifiez votre programme pour que les notes ne soient plus données en paramètres, mais saisies et
+stockées au fur et à mesure dans un tableau.
 
+1/2. 
+#!/bin/bash
+
+function is_number()
+{
+ re='^[+-]?[0-9]+([.][0-9]+)?$'
+ if ! [[ $1 =~ $re ]] ; then
+  return 1
+ else
+  return 0
+ fi
+}
+
+MAX=-100;
+MIN=100;
+MOY=0;
+NBVAL=0;
+
+while (("$#"));
+do
+        if is_number $1 ; then
+                if [ $1 -lt $MIN ]; then
+                        MIN=$1
+                fi
+                if [ $1 -gt $MAX ]; then
+                        MAX=$1
+                fi
+                NBVAL=$(($NBVAL+1));
+                MOY=$((MOY+$1));
+        else
+                echo "$1 n'est pas en entier"
+        fi
+        shift
+done
+MOY=$(($MOY/$NBVAL))
+echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
+
+3. 
+#!/bin/bash
+
+function is_number()
+{
+ re='^[+-]?[0-9]+([.][0-9]+)?$'
+ if ! [[ $1 =~ $re ]] ; then
+  return 1
+ else
+  return 0
+ fi
+}
+
+GET=0;
+MAX=-100;
+MIN=100;
+MOY=0;
+
+TAB=();
+
+while [ $GET -lt 101 ] && [ $GET -gt -101 ]
+do
+        read -p 'rentrez la note : ' GET
+
+        if [ $GET -lt 101 ] && [ $GET -gt -101 ]; then
+                if is_number $GET ; then
+
+                        TSIZE=${#TAB[*]}
+                        TAB[$TSIZE+1]=$GET
+
+                        if [ $GET -lt $MIN ]; then
+                                MIN=$GET
+                        fi
+                        if [ $GET -gt $MAX ]; then
+                                MAX=$GET
+                        fi
+
+                        MOY=$(($MOY+$GET))
+                else
+                        echo "$GET n'est pas en entier"
+                fi
+        fi
+done
+TSIZE=${#TAB[*]}
+echo "Generate Table ... ($TSIZE value(s))";
+echo ${TAB[*]};
+MOY=$(($MOY/$TSIZE))
+echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
