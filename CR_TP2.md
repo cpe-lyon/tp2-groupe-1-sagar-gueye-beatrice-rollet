@@ -47,6 +47,7 @@ On utilise la commande echo Bonjour à vous deux $NOMS.
 unset permet de supprimer un variable alors que donner une valeur vide à une variable ne la supprime pas, elle existera toujours.
 
 **10.Utilisez la commande echo pour écrire exactement la phrase :$HOME =chemin(où chemin est votre dossier personnel d’après bash)**
+
 On utlise la commande echo '$HOME' = $HOME
 
 Exercice 2
