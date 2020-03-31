@@ -1,3 +1,5 @@
+TP2 compte rendu du binôme Sagar Gueye - Béatrice Rollet
+
 EXERCICE 1:  
 1.Dans quels dossiers bash trouve-t-il les commandes tapées par l’utilisateur?  On utilise la commande printenv PATH. On obtient ceci : /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin  
 2. Quelle variable d’environnement permet à la commandecdtapée sans argument de vous ramener dansvotre répertoire personnel?  On utilise la commande cd $HOME.  
